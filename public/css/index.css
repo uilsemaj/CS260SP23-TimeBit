@@ -1,0 +1,89 @@
+html {
+    background-color: snow;
+  }
+
+.container {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	height: 100vh;
+}
+
+/* Style the tab */
+.tab {
+    width: 80%;
+    display: flex;
+	justify-content: center;
+	align-items: center;
+	overflow: hidden;
+	border-bottom: 1px solid #ccc;
+	background-color: #f1f1f1;
+}
+
+/* Style the buttons that are used to open the tab content */
+.tab button {
+	background-color: inherit;
+	float: left;
+	border: none;
+	outline: none;
+	cursor: pointer;
+	padding: 14px 16px;
+	transition: 0.3s;
+	font-size: 17px;
+}
+
+/* Change background color of buttons on hover */
+.tab button:hover {
+	background-color: #ddd;
+}
+
+/* Create an active/current tablink class */
+.tab button.active {
+	background-color: #43AD48;
+}
+
+/* Style the tab content */
+.tabcontent {
+	display: none;
+	padding: 6px 12px;
+	border-top: none;
+    width: 80%;
+    overflow: scroll;
+    margin-top: 20px;
+}
+
+#task-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.task {
+    width: 80%;
+    padding: 10px;
+    background-color: #C8E6C9;
+    text-align: center;
+    flex-basis: 100%;
+    margin-bottom: 30px;
+}
+
+.task > img {
+    width: 100px;
+    height: 100px;
+}
+
+.task-header {
+    font-size: 24px;
+    margin: 0;
+}
+
+/* Style the tab content for mobile devices */
+@media screen and (max-width: 600px) {
+	.tab button {
+		font-size: 12px;
+	}
+	.tabcontent {
+		padding: 4px 8px;
+	}
+}
