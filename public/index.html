@@ -9,6 +9,37 @@
 <!-- <script type='module' src="https://www.gstatic.com/firebasejs/9.4.0/firebase-app.js"></script>
 <script type='module' src="https://www.gstatic.com/firebasejs/9.4.0/firebase-firestore.js"></script> -->
 <script type='module' src="js/index.js"></script>
+<!-- Script and dependency for AI assistant -->
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<script type="module" src="js/firestore.js"></script>
+<script type="module" src="js/assistant.js"></script>
+<style>
+    .chatbox {
+        width: 400px;
+        height: 500px;
+        border: 1px solid black;
+        overflow-y: scroll;
+    }
+    .bubble {
+        display: inline-block;
+        max-width: 75%;
+        margin: 5px;
+        padding: 10px;
+        border-radius: 10px;
+        font-size: 18px;
+        font-family: Arial, sans-serif;
+    }
+    .blue {
+        background-color: #2f80ed;
+        color: white;
+        float: left;
+    }
+    .green {
+        background-color: #27ae60;
+        color: white;
+        float: right;
+    }
+</style>
 </head>
 
 
@@ -23,7 +54,19 @@
         </div>
         <div id="Tab1" class="tabcontent">
             <h3>Voice Assistant</h3>
-            <p>Input box and voice assistant will go here.</p>
+            <div class="chatbox" id="chatbox">
+                <div class="bubble blue">Hello there! Please tell me about your goals. Try to keep it in a clear sentence with specific target date of less than 2 weeks. For example, a goal could be "Can you help me come up with a plan to prepare for my 5k run in 5 days? I have been running 1k per day but feels like I need to improve my stamina."</div>
+            </div>
+            <input type="text" id="userInput" placeholder="Type your message here">
+            <button id="send">Send</button>
+            <script type="module">
+                import { runFlow } from './js/assistant.js';
+
+                document.querySelector('#send').addEventListener('click', () => {
+                  runFlow();
+                });
+            </script>
+
         </div>
         <div id="Tab2" class="tabcontent">
             <h3>Home</h3>
