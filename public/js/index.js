@@ -100,7 +100,7 @@ document.addEventListener("DOMContentLoaded", async function(event) {
     // Invitations Pop Up
     const inviteBtns = document.querySelectorAll('.invite');
 
-    // const popUpBtn = document.getElementById("invite");
+    const popUpBtn = document.getElementById("invite");
     const closePopupBtn = document.getElementById("close-pop-up");
 	const popUp = document.getElementById("pop-up");
 
@@ -112,12 +112,12 @@ document.addEventListener("DOMContentLoaded", async function(event) {
         popUp.style.display = 'none';
     }
 
-	// popUpBtn.addEventListener("click", showPopUp);
+	popUpBtn.addEventListener("click", showPopUp);
     inviteBtns.forEach((btn) => {
         btn.addEventListener("click", showPopUp);
     });
     closePopupBtn.addEventListener("click", closePopup);
-    
+
 });
 
 
