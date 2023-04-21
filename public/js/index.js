@@ -42,83 +42,37 @@ document.addEventListener("DOMContentLoaded", async function(event) {
         var description = task.description;
         var imageUrl = task.image_url;
 
-        var taskHTML = '<div class="list-item">' + 
-        '<div class="list-content"><div class="profile"><img src="' + imageUrl + '"></div><div class="caption"><h3>' + taskName + ' - ' + estimatedTime +  ' min</h3><p>' + description + '</p></div></div>' +
-        '<button id="invite" class="invite"><div class="list-icon"><i class="bx bxs-share"></i></div></button>' + '</div>';
+        var taskHTML = '<div class="task"><img src="' + imageUrl + '"><p class="task-header">' + taskName + ' - ' + estimatedTime +  'min</p><p>' + description 
+        + '</p><i class="fas fa-trash-alt">' + '</i><i class="fas fa-check"></i></div>';
 
-        $('#task-container').append(taskHTML);
+        $('.task-container .notcomp').append(taskHTML);
 
         i++;
     }
 
+    // Add event handler to the dynamically created task divs
+    $(".task-container .notcomp").on("click", ".task", function() {
+        $(this).toggleClass("completed");
+    });
 
-    // Left swipe <reference: https://github.com/hosseinnabi-ir/Touch-Swiping-List-Items-using-JavaScript>
-    const items = document.querySelectorAll('.list-item');
-    
-    items.forEach(item => {
-        // Touch start
-        item.addEventListener('touchstart', e => {
-            e.target.dataset.x = Number(e.touches[0].pageX) + Number(e.target.dataset.move) || 0;
-        });
-        // Touch move
-        item.addEventListener('touchmove', e => {
-            let moveX = Number(e.target.dataset.x) - e.touches[0].pageX;
-            // Set up move duration
-            moveX < -130 ? moveX = 95 : null;
-            e.target.dataset.move = moveX;
-            anime({
-                targets: e.target,
-                translateX: -Number(e.target.dataset.move),
-                duration: 300
-            });
-        });
-        // Touch end
-        item.addEventListener('touchend', e => {
-            let elementMove = e.target.dataset.move;
-            if (elementMove > 100)
-                elementMove = 100;
-            else if (elementMove < -100)
-                elementMove = -100;
-            else
-                elementMove = 0;
-    
-            items.forEach(item => {
-                let content = item.querySelector('.list-content');
-                if (content === e.target) {
-                    return null;
-                }
-                content.dataset.x = 0;
-                content.dataset.move = 0;
-                anime({
-                    targets: content,
-                    translateX: 0
-                });
-            });
+    // Add event handler to the dynamically created trash icons
+    $(".task-container .notcomp").on("click", ".fa-trash-alt", function() {
+        var taskDiv = $(this).parent();
+        taskDiv.fadeOut(function() {
+            taskDiv.remove();
         });
     });
 
-    // Invitations Pop Up
-    const inviteBtns = document.querySelectorAll('.invite');
-
-    const popUpBtn = document.getElementById("invite");
-    const closePopupBtn = document.getElementById("close-pop-up");
-	const popUp = document.getElementById("pop-up");
-
-	function showPopUp() {
-		popUp.style.display = "flex";
-	}
-
-    function closePopup() {
-        popUp.style.display = 'none';
-    }
-
-	popUpBtn.addEventListener("click", showPopUp);
-    inviteBtns.forEach((btn) => {
-        btn.addEventListener("click", showPopUp);
+    // Add event handler to the dynamically created check icons
+    $(".task-container .notcomp").on("click", ".fa-check", function() {
+        var taskDiv = $(this).parent();
+        taskDiv.fadeOut(function() {
+            $(".comp").append(taskDiv);
+            taskDiv.fadeIn();
+            taskDiv.find(".fa-trash-alt").remove();
+        });
+        $(this).remove();
     });
-    closePopupBtn.addEventListener("click", closePopup);
-
-    // Customize iMessage
     
 });
 
