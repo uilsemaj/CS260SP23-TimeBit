@@ -44,16 +44,17 @@ document.addEventListener("DOMContentLoaded", async function(event) {
 
         var taskHTML = '<div class="list-item">' + 
         '<div class="list-content"><div class="profile"><img src="' + imageUrl + '"></div><div class="caption"><h3>' + taskName + ' - ' + estimatedTime +  ' min</h3><p>' + description + '</p></div></div>' +
-        '<button class="settings"><div class="list-icon"><i class="bx bxs-share"></i></div></button>' + '</div>';
+        '<button id="invite" class="invite"><div class="list-icon"><i class="bx bxs-share"></i></div></button>' + '</div>';
 
         $('#task-container').append(taskHTML);
 
         i++;
     }
 
+
     // Left swipe <reference: https://github.com/hosseinnabi-ir/Touch-Swiping-List-Items-using-JavaScript>
     const items = document.querySelectorAll('.list-item');
-
+    
     items.forEach(item => {
         // Touch start
         item.addEventListener('touchstart', e => {
@@ -73,9 +74,7 @@ document.addEventListener("DOMContentLoaded", async function(event) {
         });
         // Touch end
         item.addEventListener('touchend', e => {
-
             let elementMove = e.target.dataset.move;
-    
             if (elementMove > 100)
                 elementMove = 100;
             else if (elementMove < -100)
@@ -84,24 +83,41 @@ document.addEventListener("DOMContentLoaded", async function(event) {
                 elementMove = 0;
     
             items.forEach(item => {
-    
                 let content = item.querySelector('.list-content');
-    
                 if (content === e.target) {
                     return null;
                 }
-    
                 content.dataset.x = 0;
                 content.dataset.move = 0;
-    
                 anime({
                     targets: content,
                     translateX: 0
                 });
-    
             });
         });
     });
+
+    // Invitations Pop Up
+    const inviteBtns = document.querySelectorAll('.invite');
+
+    // const popUpBtn = document.getElementById("invite");
+    const closePopupBtn = document.getElementById("close-pop-up");
+	const popUp = document.getElementById("pop-up");
+
+	function showPopUp() {
+		popUp.style.display = "flex";
+	}
+
+    function closePopup() {
+        popUp.style.display = 'none';
+    }
+
+	// popUpBtn.addEventListener("click", showPopUp);
+    inviteBtns.forEach((btn) => {
+        btn.addEventListener("click", showPopUp);
+    });
+    closePopupBtn.addEventListener("click", closePopup);
+    
 });
 
 

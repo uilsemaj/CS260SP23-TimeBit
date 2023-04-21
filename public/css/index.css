@@ -157,11 +157,59 @@ html {
     font-size: 30px;
 }
 
-.list .settings {
+.list .invite {
     right: 10px;
     color: #010101;
     background: #e7eaed;
     justify-content: flex-end;
+}
+
+/* Style for invitation profiles */
+.popup {
+	width: 100%;
+	margin: 0 auto;
+	padding: 20px;
+	transform: translate(-50%, -50%);
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	display: none;
+	justify-content: center;
+	overflow-x: auto;
+	white-space: nowrap;
+	box-sizing: border-box;
+    border-radius: 8px; 
+    align-items: center; 
+	background-color: #fff;
+	border: 1px solid #ccc;
+	box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+	z-index: 9999;
+}
+
+.popup .profile img {
+	display: inline-block;
+	width: 80px;
+	height: 80px;
+	object-fit: contain;
+	border-radius: 50%;
+}
+  
+.popup .profile p {
+	margin-top: 2px;
+	font-weight: bold;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	text-align: center;
+}
+
+.popup button {
+    cursor: pointer;
+    position: absolute;
+    display: flex;
+    bottom: 5px;
+    justify-content: flex-start;
+    border-radius: 18px;
+    transition: .2s ease-out;
 }
 
 /* Style the tab content for mobile devices */
@@ -176,7 +224,4 @@ html {
         width: 65px;
         font-size: 28px;
     }
-
-    
-
 }
