@@ -77,8 +77,7 @@ document.addEventListener("DOMContentLoaded", async function(event) {
             let elementMove = e.target.dataset.move;
             if (elementMove > 100)
                 elementMove = 100;
-            else if (elementMove < -100)
-                elementMove = -100;
+            
             else
                 elementMove = 0;
     
