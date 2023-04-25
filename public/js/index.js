@@ -1,4 +1,4 @@
-import {db, POWER_USER_ID} from "./firestore.js";
+import {db, deleteTask, POWER_USER_ID} from "./firestore.js";
 import { getFirestore, collection, getDocs, doc, getDoc } from "https://www.gstatic.com/firebasejs/9.1.1/firebase-firestore.js"
 
 const categoryToImage = {
@@ -36,8 +36,12 @@ document.addEventListener("DOMContentLoaded", async function(event) {
         console.log(`${doc.id} => ${doc.data()}`);
         console.log(doc.data())
         var data = doc.data();
-        var task = new Task(doc.id, data['task_name'], data['description'], data['completed'], data['estimated_time'], data['image_url'], data['invited'], data['category']);
-        tasks.push(task);
+        var task = new Task(doc.id, data['task_name'], data['description'], data['completed'], data['estimated_time'], data['image_url'], data['invited'], data['category'], data['deleted']);
+
+        // filter out ones with deleted set to true
+        if (!task.deleted) {
+            tasks.push(task);
+        }
     });
 
     let i = 0;
@@ -52,7 +56,7 @@ document.addEventListener("DOMContentLoaded", async function(event) {
         var imageUrl = task.image_url == null ? imageUrlByCategory : task.image_url;
 
         var taskNameDisplay = estimatedTime == null ? taskName : taskName + ' - ' + estimatedTime  +  'min';
-        var taskHTML = '<div class="task"><img src="' + imageUrl + '"><p class="task-header">' + taskNameDisplay +  '</p><p>' + description
+        var taskHTML = '<div class="task" data-id="' + task.id + '"><img src="' + imageUrl + '"><p class="task-header">' + taskNameDisplay +  '</p><p>' + description
         + '</p><i class="fas fa-trash-alt">' + '</i><i class="fas fa-check"></i></div>';
 
         $('.task-container .notcomp').append(taskHTML);
@@ -68,6 +72,9 @@ document.addEventListener("DOMContentLoaded", async function(event) {
     // Add event handler to the dynamically created trash icons
     $(".task-container .notcomp").on("click", ".fa-trash-alt", function() {
         var taskDiv = $(this).parent();
+
+        //TODO: add actual delete
+        deleteTask(taskDiv.attr("data-id"));
         taskDiv.fadeOut(function() {
             taskDiv.remove();
         });
@@ -88,7 +95,7 @@ document.addEventListener("DOMContentLoaded", async function(event) {
 
 
 class Task {
-    constructor(id, task_name, description, completed, estimated_time, image_url, invited, category) {
+    constructor(id, task_name, description, completed, estimated_time, image_url, invited, category, deleted) {
         this.id = id;
         this.task_name = task_name;
         this.description = description;
@@ -97,5 +104,6 @@ class Task {
         this.image_url = image_url;
         this.invited = invited;
         this.category = category;
+        this.deleted = deleted == null ? false : deleted;
     }
 }
