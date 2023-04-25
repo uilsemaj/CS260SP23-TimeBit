@@ -44,7 +44,7 @@ document.addEventListener("DOMContentLoaded", async function(event) {
 
         var taskHTML = '<div class="list-item">' + 
         '<div class="list-content"><div class="profile"><img src="' + imageUrl + '"></div><div class="caption"><h3>' + taskName + ' - ' + estimatedTime +  ' min</h3><p>' + description + '</p></div></div>' +
-        '<button id="invite" class="invite"><div class="list-icon"><i class="bx bxs-share"></i></div></button>' + '</div>';
+        '<button id="complete" class="complete"><div class="list-icon"><i class="bx bx-check"></i></div></button>' + '</div>';
 
         $('#task-container').append(taskHTML);
 
@@ -97,6 +97,23 @@ document.addEventListener("DOMContentLoaded", async function(event) {
         });
     });
 
+    // Mark task as completed
+    const checkBtns = document.querySelectorAll('.complete');
+    checkBtns.forEach((btn) => {
+        btn.addEventListener("click", markTaskAsCompleted);
+    });
+
+    function markTaskAsCompleted() {
+        console.log("completed");
+        var taskDiv = $(this).parent();
+        taskDiv.fadeOut(function() {
+            $(".comp").append(taskDiv);
+            taskDiv.fadeIn();
+            taskDiv.find(".fa-trash-alt").remove();
+        });
+        $(this).remove();
+    }
+
     // Invitations Pop Up
     const inviteBtns = document.querySelectorAll('.invite');
 
@@ -117,8 +134,6 @@ document.addEventListener("DOMContentLoaded", async function(event) {
         btn.addEventListener("click", showPopUp);
     });
     closePopupBtn.addEventListener("click", closePopup);
-
-    // Customize iMessage
     
 });
 
