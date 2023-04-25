@@ -71,7 +71,8 @@ function toFirestoreTasks(chatGPTTasks) {
     function toFirestoreTask(chatGPTTask) {
         firestoreTasks.push({"task_name" : chatGPTTask["Title"],
             "description" : chatGPTTask["Description"],
-            "date": chatGPTTask["DueDate"]});
+            "date": chatGPTTask["DueDate"],
+            "category": chatGPTTask["Category"]});
 
     }
     chatGPTTasks.forEach(toFirestoreTask);
@@ -116,7 +117,7 @@ async function obtainPreliminaryPlan() {
             chatbox.scrollTop = chatbox.scrollHeight;
 
             //TODO move this out
-            const toJSONListprompt = "Great, could you convert this plan to JSON format? I\u2019d like you to only output a single JSON list as your response. For example, if you have the following tasks in day 1:\r\n\r\nDay 1 - Get started:\r\nWarm-up: 10-minute brisk walk\r\nRun\/walk: 15 minutes at a comfortable pace\r\nCool-down: 5-minute walk\r\n\r\nCan you convert the tasks to a JSON list in this format(Assuming day 1 is 2023-04-19):\r\n\r\n[{\u201CTitle\u201D: \u201CWarm-up: 10-minute brisk walk\u201D,\r\n   \u201CDueDate\u201D: \u201C2023-04-19\u201D},\r\n{\u201CTitle\u201D: \u201CRun\/walk: 15 minutes at a comfortable pace\u201D,\r\n   \u201CDueDate\u201D: \u201C2023-04-19\u201D},\r\n{\u201CTitle\u201D: \u201CCool-down: 5-minute walk\u201D,\r\n   \u201CDueDate\u201D: \u201C2023-04-19\u201D}]";
+            const toJSONListprompt = "Great, could you convert this plan to JSON format? I\u2019d like you to only output a single JSON list as your response. Each JSON item will have Four fields: \"Title\", \"DueDate\", \"Description\", and \"Category\". \"Category\" must be one of the following values: \"workout\", \"running\", \"language\", \"other\". \r\n\r\nAs an example, if you have the following tasks in day 1:\r\n\r\nDay 1 - Get started:\r\nWarm-up: 10-minute brisk walk\r\nRun\/walk: 15 minutes at a comfortable pace\r\nCool-down: 5-minute walk\r\n\r\nCan you convert the tasks to a JSON list in this format(Assuming day 1 is 2023-04-19):\r\n\r\n[{\u201CTitle\u201D: \u201CWarm-up\u201D,\r\n   \u201CDueDate\u201D: \u201C2023-04-19\u201D,\r\n   \"Description\": \"10-minute brisk walk\",\r\n   \u201DCategory\": \"workout\"},\r\n{\u201CTitle\u201D: \u201CRun\/walk\u201D,\r\n   \u201CDueDate\u201D: \u201C2023-04-19\u201D,\r\n   \"Description\": \"15 minutes at a comfortable pace\",\r\n   \u201DCategory\": \"running\"},\r\n{\u201CTitle\u201D: \u201CCool-down\u201D,\r\n   \u201CDueDate\u201D: \u201C2023-04-19\u201D,\r\n   \"Description\": \"5-minute walk\",\r\n   \u201DCategory\": \"workout\"}]";
             messageHistory.push({role: "user", content: toJSONListprompt});
             axios.post('https://api.openai.com/v1/chat/completions', data, config)
                 .then(function (response) {
