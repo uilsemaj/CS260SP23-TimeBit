@@ -16,4 +16,6 @@ import { getFirestore, collection, getDocs, doc, getDoc } from "https://www.gsta
 
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(); // Get a reference to the Firestore database
+
+
 export {db, POWER_USER_ID};
