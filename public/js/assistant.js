@@ -111,7 +111,7 @@ async function obtainPreliminaryPlan() {
             console.log(response);
             console.log(messageHistory);
             var botBubble = document.createElement("div");
-            botBubble.innerHTML = botResponse;
+            botBubble.innerHTML = toHTMLmessage(botResponse);
             botBubble.classList.add("bubble", "blue");
             chatbox.appendChild(botBubble);
             chatbox.scrollTop = chatbox.scrollHeight;
@@ -147,6 +147,10 @@ async function obtainPreliminaryPlan() {
     });
     console.log("waiting..");
 
+}
+
+function toHTMLmessage(jsString) {
+    return jsString.replace(/\n/g, "<br>");
 }
 
 
