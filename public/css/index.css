@@ -112,6 +112,8 @@ html {
     pointer-events: none;
 }
 
+
+
 .list .list-content .caption {
     width: 75%;
     padding-left: 6px;
@@ -140,10 +142,17 @@ html {
     margin-bottom: 20px;
 }
 
-.list button {
+.list button:first-child {
     cursor: pointer;
     position: absolute;
-    width: 100%;
+    border: transparent;
+    background-color: transparent;
+}
+
+.list button:last-child {
+    cursor: pointer;
+    position: absolute;
+    width: 50%;
     height: 80%;
     display: flex;
     align-items: center;
@@ -157,7 +166,7 @@ html {
     font-size: 30px;
 }
 
-.list .invite {
+.list .complete {
     right: 10px;
     color: #010101;
     background: #e7eaed;
@@ -202,14 +211,12 @@ html {
 	text-align: center;
 }
 
-.popup button {
+.popup button:first-child {
     cursor: pointer;
     position: absolute;
     display: flex;
     bottom: 5px;
     justify-content: flex-start;
-    border-radius: 18px;
-    transition: .2s ease-out;
 }
 
 /* Style the tab content for mobile devices */

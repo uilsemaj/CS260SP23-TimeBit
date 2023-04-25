@@ -43,7 +43,9 @@ document.addEventListener("DOMContentLoaded", async function(event) {
         var imageUrl = task.image_url;
 
         var taskHTML = '<div class="list-item">' + 
-        '<div class="list-content"><div class="profile"><img src="' + imageUrl + '"></div><div class="caption"><h3>' + taskName + ' - ' + estimatedTime +  ' min</h3><p>' + description + '</p></div></div>' +
+        '<div class="list-content"><div class="profile">' + '<img src="' + imageUrl + '"></div>' + 
+        '<button id="ellipse" class="ellipse"><div class="list-icon"><i class="bx bx-dots-horizontal-rounded"></i></div></button><div class="caption">' +
+        '<h3>' + taskName + ' - ' + estimatedTime +  ' min</h3><p>' + description + '</p></div></div>' +
         '<button id="complete" class="complete"><div class="list-icon"><i class="bx bx-check"></i></div></button>' + '</div>';
 
         $('#task-container').append(taskHTML);
@@ -113,26 +115,46 @@ document.addEventListener("DOMContentLoaded", async function(event) {
         $(this).remove();
     }
 
+    // Ellipse choice list Pop Up
+    const ellipseBtns = document.querySelectorAll('.ellipse');
+    const choicepopUpBtn = document.getElementById("ellipse");
+    const closeChoicePopupBtn = document.getElementById("close-choice-pop-up");
+	const choicePopUp = document.getElementById("choice-pop-up");
+
+    function showChoicePopUp() {
+		choicePopUp.style.display = "flex";
+	}
+
+    function closeChoicePopup() {
+        choicePopUp.style.display = 'none';
+    }
+
+    ellipseBtns.forEach((btn) => {
+        btn.addEventListener("click", showChoicePopUp);
+    });
+    closeChoicePopupBtn.addEventListener("click", closeChoicePopup);
+
+
     // Invitations Pop Up
     const inviteBtns = document.querySelectorAll('.invite');
 
     const popUpBtn = document.getElementById("invite");
-    const closePopupBtn = document.getElementById("close-pop-up");
-	const popUp = document.getElementById("pop-up");
+    const closeInvPopupBtn = document.getElementById("close-inv-pop-up");
+	const invPopUp = document.getElementById("inv-pop-up");
 
-	function showPopUp() {
-		popUp.style.display = "flex";
+	function showInvPopUp() {
+		invPopUp.style.display = "flex";
 	}
 
-    function closePopup() {
-        popUp.style.display = 'none';
+    function closeInvPopup() {
+        invPopUp.style.display = 'none';
     }
 
-	popUpBtn.addEventListener("click", showPopUp);
+	popUpBtn.addEventListener("click", showInvPopUp);
     inviteBtns.forEach((btn) => {
-        btn.addEventListener("click", showPopUp);
+        btn.addEventListener("click", showInvPopUp);
     });
-    closePopupBtn.addEventListener("click", closePopup);
+    closeInvPopupBtn.addEventListener("click", closeInvPopup);
     
 });
 
