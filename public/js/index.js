@@ -57,16 +57,16 @@ document.addEventListener("DOMContentLoaded", async function(event) {
 
         var taskNameDisplay = estimatedTime == null ? taskName : taskName + ' - ' + estimatedTime  +  'min';
         
-        var taskHTML = '<div class="task" data-id="' + task.id + '"><img src="' + imageUrl + '"><p class="task-header">' + taskNameDisplay +  '</p><p>' + description
-        + '</p><i class="fas fa-trash-alt">' + '</i><i class="fas fa-check"></i></div>';
+        // var taskHTML = '<div class="task" data-id="' + task.id + '"><img src="' + imageUrl + '"><p class="task-header">' + taskNameDisplay +  '</p><p>' + description
+        // + '</p><i class="fas fa-trash-alt">' + '</i><i class="fas fa-check"></i></div>';
         
         var taskHTML = '<div class="list-item" data-id="' + task.id + '">' + 
         '<div class="list-content"><div class="profile">' + '<img src="' + imageUrl + '"></div>' + 
-        '<div class="caption"><h3>' + taskNameDisplay +  '</h3><p>' + description + 
+        '<div class="caption"><p class="task-header">' + taskNameDisplay +  '</p><p>' + description + 
         '</p></div><button id="ellipse" class="ellipse"><div class="list-icon"><i class="bx bx-dots-horizontal-rounded"></i></div></button></div>' +
         '<button id="complete" class="complete"><div class="list-icon"><i class="bx bx-check"></i></div></button>' + '</div>';
 
-        $('.task-container .notcomp').append(taskHTML);
+        $('#task-container').append(taskHTML);
 
         i++;
     }
@@ -126,10 +126,11 @@ document.addEventListener("DOMContentLoaded", async function(event) {
         var taskDiv = $(this).parent();
         taskDiv.fadeOut(function() {
             $(".comp").append(taskDiv);
-            taskDiv.fadeIn();
-            taskDiv.find(".fa-trash-alt").remove();
+            $('.list-item').css({
+                'display': 'flex',
+            });
         });
-        $(this).remove();
+        $(this).hide();
     }
 
     // Ellipse choice list Pop Up
