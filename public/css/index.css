@@ -2,6 +2,12 @@
 	font-family: 'Open Sans', sans-serif;
 }
 
+.bx {
+    width: 100%;
+    height: 100%;
+    font-size: 25px;
+}
+
 html {
     background-color: snow;
 }
@@ -79,7 +85,7 @@ html {
 } */
 
 .task-header {
-    font-size: 24px;
+    font-size: 20px;
     margin: 0;
 } */
 
@@ -113,8 +119,6 @@ html {
     pointer-events: none;
 }
 
-
-
 .list .list-content .caption {
     width: 75%;
     padding-left: 6px;
@@ -122,6 +126,7 @@ html {
     align-items: center;
     justify-content: flex-start;
     pointer-events: none;
+    bottom: 1px;
 }
 
 .list .list-content img {
@@ -129,24 +134,18 @@ html {
     height: 100px;
 }
 
-.list .list-content h3 {
-    color: #010101;
-    font-size: 20px;
-    font-weight: 700;
-    letter-spacing: -1px;
-}
-
 .list .list-content p {
     color: 010101;
+    padding: 3px;
     font-size: 15px;
     font-weight: 500;
-    margin-bottom: 20px;
+    margin-bottom: 10px;
 }
 
 /* For the ellipse icon */
 .list .list-content button {
-    width: 10%;
-    height: 10%;
+    width: 0%;
+    height: 0%;
     cursor: pointer;
     position: absolute;
     top: 0px;
@@ -155,17 +154,14 @@ html {
     background-color: transparent;
 }
 
-/* For complete icon */
+/* For complete button */
 .list button:last-child {
     cursor: pointer;
     position: absolute;
-    width: 50%;
-    height: 80%;
+    border: transparent;
     display: flex;
     align-items: center;
     justify-content: flex-end;
-    border-radius: 18px;
-    transition: .2s ease-out;
 }
 
 .list button .list-icon {
@@ -176,18 +172,19 @@ html {
     font-size: 30px;
 }
 
+/* For the complete icon */
 .list .complete {
     right: 10px;
     color: #010101;
-    background: #e7eaed;
+    background: transparent;
     justify-content: flex-end;
 }
 
-/* Style for invitation profiles */
+/* Style for pop-ups */
 .popup {
 	width: 100%;
 	margin: 0 auto;
-	padding: 20px;
+	padding: 40px;
 	transform: translate(-50%, -50%);
 	position: absolute;
 	top: 50%;
@@ -227,6 +224,24 @@ html {
     display: flex;
     bottom: 5px;
     justify-content: flex-start;
+}
+
+.popup button:nth-child(2) {
+    
+    cursor: pointer;
+    position: absolute;
+    display: flex;
+    margin-right: 13%;
+    margin-bottom: 8%;
+}
+
+.popup button:nth-child(3) {
+    
+    cursor: pointer;
+    position: absolute;
+    display: flex;
+    margin-left: 13%;
+    margin-bottom: 8%;
 }
 
 /* Style the tab content for mobile devices */

@@ -57,9 +57,6 @@ document.addEventListener("DOMContentLoaded", async function(event) {
 
         var taskNameDisplay = estimatedTime == null ? taskName : taskName + ' - ' + estimatedTime  +  'min';
         
-        // var taskHTML = '<div class="task" data-id="' + task.id + '"><img src="' + imageUrl + '"><p class="task-header">' + taskNameDisplay +  '</p><p>' + description
-        // + '</p><i class="fas fa-trash-alt">' + '</i><i class="fas fa-check"></i></div>';
-        
         var taskHTML = '<div class="list-item" data-id="' + task.id + '">' + 
         '<div class="list-content"><div class="profile">' + '<img src="' + imageUrl + '"></div>' + 
         '<div class="caption"><p class="task-header">' + taskNameDisplay +  '</p><p>' + description + 
@@ -96,7 +93,6 @@ document.addEventListener("DOMContentLoaded", async function(event) {
             let elementMove = e.target.dataset.move;
             if (elementMove > 100)
                 elementMove = 100;
-            
             else
                 elementMove = 0;
     
