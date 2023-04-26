@@ -62,12 +62,10 @@ document.addEventListener("DOMContentLoaded", async function(event) {
 
 export function runFlow() {
     $('.assistant-first-inputs').hide();
-    obtainPreliminaryPlan()
-    
-    
+    obtainPreliminaryPlan();
+
     // TODO move JSON extraction to here once time allows.
 //    console.log(messageHistory[messageHistory.length-1]["content"]);
-
 }
 
 function parseJSONFromResponse(str) {
