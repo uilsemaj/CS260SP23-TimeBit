@@ -173,6 +173,10 @@ async function obtainPreliminaryPlan(prompt) {
     console.log("waiting..");
 }
 
+function toHTMLmessage(jsString) {
+    return jsString.replace(/\n/g, "<br>");
+}
+
 async function getJSONTasksFromPlan() {
     // Converts the gpt response to readable JSON
     // TODO: move this out
