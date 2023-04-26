@@ -33,8 +33,8 @@ document.addEventListener("DOMContentLoaded", async function(event) {
     var tasks = [];
 
     querySnapshot.forEach((doc) => {
-        console.log(`${doc.id} => ${doc.data()}`);
-        console.log(doc.data())
+        // console.log(`${doc.id} => ${doc.data()}`);
+        // console.log(doc.data())
         var data = doc.data();
         var task = new Task(doc.id, data['task_name'], data['description'], data['completed'], data['estimated_time'], data['image_url'], data['invited'], data['category']);
         tasks.push(task);
