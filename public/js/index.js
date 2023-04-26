@@ -1,7 +1,13 @@
-import {db, POWER_USER_ID} from "./firestore.js";
+import {db, deleteTask, POWER_USER_ID} from "./firestore.js";
 import { getFirestore, collection, getDocs, doc, getDoc } from "https://www.gstatic.com/firebasejs/9.1.1/firebase-firestore.js"
 
+const categoryToImage = {
+    "other": "https://cdn-icons-png.flaticon.com/512/858/858150.png",
+    "workout": "https://cdn-icons-png.flaticon.com/512/38/38464.png",
+    "language": "https://cdn-icons-png.flaticon.com/512/484/484633.png",
+    "running": "https://cdn-icons-png.flaticon.com/512/5073/5073994.png",
 
+}
 document.addEventListener("DOMContentLoaded", async function(event) {
 
     $(document).on("click", ".tablinks", function() {
@@ -27,11 +33,15 @@ document.addEventListener("DOMContentLoaded", async function(event) {
     var tasks = [];
 
     querySnapshot.forEach((doc) => {
-        console.log(`${doc.id} => ${doc.data()}`);
-        console.log(doc.data())
+        // console.log(`${doc.id} => ${doc.data()}`);
+        // console.log(doc.data())
         var data = doc.data();
-        var task = new Task(doc.id, data['task_name'], data['description'], data['completed'], data['estimated_time'], data['image_url'], data['invited'], data['deleted']);
-        tasks.push(task);
+        var task = new Task(doc.id, data['task_name'], data['description'], data['completed'], data['estimated_time'], data['image_url'], data['invited'], data['category'], data['deleted']);
+
+        // filter out ones with deleted set to true
+        if (!task.deleted) {
+            tasks.push(task);
+        }
     });
 
     let i = 0;
@@ -40,15 +50,23 @@ document.addEventListener("DOMContentLoaded", async function(event) {
         var taskName = task.task_name;
         var estimatedTime = task.estimated_time;
         var description = task.description;
-        var imageUrl = task.image_url;
 
-        var taskHTML = '<div class="list-item">' + 
+        // Grab Existing Image based on category is url not provided.
+        var imageUrlByCategory = task.category == null ? categoryToImage["other"] : categoryToImage[task.category]; //TODO: edge case handling
+        var imageUrl = task.image_url == null ? imageUrlByCategory : task.image_url;
+
+        var taskNameDisplay = estimatedTime == null ? taskName : taskName + ' - ' + estimatedTime  +  'min';
+        
+        var taskHTML = '<div class="task" data-id="' + task.id + '"><img src="' + imageUrl + '"><p class="task-header">' + taskNameDisplay +  '</p><p>' + description
+        + '</p><i class="fas fa-trash-alt">' + '</i><i class="fas fa-check"></i></div>';
+        
+        var taskHTML = '<div class="list-item" data-id="' + task.id + '">' + 
         '<div class="list-content"><div class="profile">' + '<img src="' + imageUrl + '"></div>' + 
-        '<div class="caption"><h3>' + taskName + ' - ' + estimatedTime +  ' min</h3><p>' + description + 
+        '<div class="caption"><h3>' + taskNameDisplay +  '</h3><p>' + description + 
         '</p></div><button id="ellipse" class="ellipse"><div class="list-icon"><i class="bx bx-dots-horizontal-rounded"></i></div></button></div>' +
         '<button id="complete" class="complete"><div class="list-icon"><i class="bx bx-check"></i></div></button>' + '</div>';
 
-        $('#task-container').append(taskHTML);
+        $('.task-container .notcomp').append(taskHTML);
 
         i++;
     }
@@ -166,6 +184,9 @@ document.addEventListener("DOMContentLoaded", async function(event) {
       
         // Add click event listener to delete button
         $('#delete').on('click', function() {
+          // delete from db
+          deleteTask(taskElement.attr("data-id"));
+        
           // Remove the task element from the DOM
           taskElement.remove();
           choicePopUp.style.display = 'none';
@@ -173,9 +194,8 @@ document.addEventListener("DOMContentLoaded", async function(event) {
     });
 });
 
-
 class Task {
-    constructor(id, task_name, description, completed, estimated_time, image_url, invited, deleted) {
+    constructor(id, task_name, description, completed, estimated_time, image_url, invited, category, deleted) {
         this.id = id;
         this.task_name = task_name;
         this.description = description;
@@ -183,6 +203,7 @@ class Task {
         this.estimated_time = estimated_time;
         this.image_url = image_url;
         this.invited = invited;
-        this.deleted = deleted;
+        this.category = category;
+        this.deleted = deleted == null ? false : deleted;
     }
 }

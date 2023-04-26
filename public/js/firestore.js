@@ -12,8 +12,22 @@ const firebaseConfig = {
 
 
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.1.1/firebase-app.js";
-import { getFirestore, collection, getDocs, doc, getDoc } from "https://www.gstatic.com/firebasejs/9.1.1/firebase-firestore.js"
+import { getFirestore, collection, updateDoc, getDocs, doc, getDoc } from "https://www.gstatic.com/firebasejs/9.1.1/firebase-firestore.js"
 
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(); // Get a reference to the Firestore database
-export {db, POWER_USER_ID};
+
+async function deleteTask(taskId) {
+
+    const taskRef = doc(db, "tasks", POWER_USER_ID, "tasks", taskId);
+
+    await updateDoc(taskRef, {
+        deleted: true
+    });
+
+    console.log(`deleted 1 record with id ${taskId}`);
+
+}
+
+
+export {db, deleteTask, POWER_USER_ID};

@@ -1,7 +1,3 @@
-* {
-	font-family: 'Open Sans', sans-serif;
-}
-
 html {
     background-color: snow;
   }
@@ -64,7 +60,7 @@ html {
     flex-wrap: wrap;
 }
 
-/* .task {
+.task {
     width: 80%;
     padding: 10px;
     background-color: #C8E6C9;
@@ -242,5 +238,3 @@ html {
         font-size: 28px;
     }
 }
-
-  
