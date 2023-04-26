@@ -30,7 +30,7 @@ document.addEventListener("DOMContentLoaded", async function(event) {
         console.log(`${doc.id} => ${doc.data()}`);
         console.log(doc.data())
         var data = doc.data();
-        var task = new Task(doc.id, data['task_name'], data['description'], data['completed'], data['estimated_time'], data['image_url'], data['invited']);
+        var task = new Task(doc.id, data['task_name'], data['description'], data['completed'], data['estimated_time'], data['image_url'], data['invited'], data['deleted']);
         tasks.push(task);
     });
 
@@ -46,13 +46,13 @@ document.addEventListener("DOMContentLoaded", async function(event) {
         '<div class="list-content"><div class="profile">' + '<img src="' + imageUrl + '"></div>' + 
         '<button id="ellipse" class="ellipse"><div class="list-icon"><i class="bx bx-dots-horizontal-rounded"></i></div></button><div class="caption">' +
         '<h3>' + taskName + ' - ' + estimatedTime +  ' min</h3><p>' + description + '</p></div></div>' +
+        '<button id="delete" class="delete"><div class="list-icon"><i class="bx bx-trash"></i></div></button>' +
         '<button id="complete" class="complete"><div class="list-icon"><i class="bx bx-check"></i></div></button>' + '</div>';
 
         $('#task-container').append(taskHTML);
 
         i++;
     }
-
 
     // Left swipe <reference: https://github.com/hosseinnabi-ir/Touch-Swiping-List-Items-using-JavaScript>
     const items = document.querySelectorAll('.list-item');
@@ -115,6 +115,19 @@ document.addEventListener("DOMContentLoaded", async function(event) {
         $(this).remove();
     }
 
+    $("#task-container.notcomp").on("click", ".delete", function() {
+        var taskDiv = $(this).parent();
+        deleteTask(taskDiv);
+    });
+    
+    function deleteTask(taskDiv) {
+        //console.log("deleted");
+        taskDiv.fadeOut(function() {
+            taskDiv.remove();
+        });
+    }
+
+
     // Ellipse choice list Pop Up
     const ellipseBtns = document.querySelectorAll('.ellipse');
     const choicepopUpBtn = document.getElementById("ellipse");
@@ -160,7 +173,7 @@ document.addEventListener("DOMContentLoaded", async function(event) {
 
 
 class Task {
-    constructor(id, task_name, description, completed, estimated_time, image_url, invited) {
+    constructor(id, task_name, description, completed, estimated_time, image_url, invited, deleted) {
         this.id = id;
         this.task_name = task_name;
         this.description = description;
@@ -168,5 +181,6 @@ class Task {
         this.estimated_time = estimated_time;
         this.image_url = image_url;
         this.invited = invited;
+        this.deleted = deleted;
     }
 }
