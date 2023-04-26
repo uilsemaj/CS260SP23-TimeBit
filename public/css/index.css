@@ -1,6 +1,10 @@
+* {
+	font-family: 'Open Sans', sans-serif;
+}
+
 html {
     background-color: snow;
-  }
+}
 
 .container {
 	display: flex;
@@ -53,7 +57,7 @@ html {
     margin-top: 20px;
 }
 
-#task-container {
+/* #task-container {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -72,7 +76,7 @@ html {
 .task > img {
     width: 100px;
     height: 100px;
-}
+} */
 
 .task-header {
     font-size: 24px;
