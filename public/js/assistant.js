@@ -33,6 +33,8 @@ document.addEventListener("DOMContentLoaded", async function(event) {
 
     $('#assistant-accept').on('click', function() {
 
+        addBubble("Yep, we'll add them now...", false);
+
         getJSONTasksFromPlan().then( (firestoreTaskObjects) => {
 
             addTasks(firestoreTaskObjects);
