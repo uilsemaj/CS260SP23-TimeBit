@@ -44,8 +44,8 @@ document.addEventListener("DOMContentLoaded", async function(event) {
 
         var taskHTML = '<div class="list-item">' + 
         '<div class="list-content"><div class="profile">' + '<img src="' + imageUrl + '"></div>' + 
-        '<button id="ellipse" class="ellipse"><div class="list-icon"><i class="bx bx-dots-horizontal-rounded"></i></div></button><div class="caption">' +
-        '<h3>' + taskName + ' - ' + estimatedTime +  ' min</h3><p>' + description + '</p></div></div>' +
+        '<div class="caption"><h3>' + taskName + ' - ' + estimatedTime +  ' min</h3><p>' + description + 
+        '</p></div><button id="ellipse" class="ellipse"><div class="list-icon"><i class="bx bx-dots-horizontal-rounded"></i></div></button></div>' +
         '<button id="complete" class="complete"><div class="list-icon"><i class="bx bx-check"></i></div></button>' + '</div>';
 
         $('#task-container').append(taskHTML);

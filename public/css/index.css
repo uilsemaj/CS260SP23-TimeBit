@@ -143,13 +143,19 @@ html {
     margin-bottom: 20px;
 }
 
-.list button:first-child {
+/* For the ellipse icon */
+.list .list-content button {
+    width: 10%;
+    height: 10%;
     cursor: pointer;
     position: absolute;
+    top: 0px;
+    right: 0px;
     border: transparent;
     background-color: transparent;
 }
 
+/* For complete icon */
 .list button:last-child {
     cursor: pointer;
     position: absolute;
@@ -163,6 +169,9 @@ html {
 }
 
 .list button .list-icon {
+    top: 0;
+    right: 0;
+    position: absolute;
     width: 100px;
     font-size: 30px;
 }
