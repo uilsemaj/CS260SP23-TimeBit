@@ -56,32 +56,73 @@ document.addEventListener("DOMContentLoaded", async function(event) {
         var imageUrl = task.image_url == null ? imageUrlByCategory : task.image_url;
 
         var taskNameDisplay = estimatedTime == null ? taskName : taskName + ' - ' + estimatedTime  +  'min';
+        
         var taskHTML = '<div class="task" data-id="' + task.id + '"><img src="' + imageUrl + '"><p class="task-header">' + taskNameDisplay +  '</p><p>' + description
         + '</p><i class="fas fa-trash-alt">' + '</i><i class="fas fa-check"></i></div>';
+        
+        var taskHTML = '<div class="list-item" data-id="' + task.id + '">' + 
+        '<div class="list-content"><div class="profile">' + '<img src="' + imageUrl + '"></div>' + 
+        '<div class="caption"><h3>' + taskNameDisplay +  '</h3><p>' + description + 
+        '</p></div><button id="ellipse" class="ellipse"><div class="list-icon"><i class="bx bx-dots-horizontal-rounded"></i></div></button></div>' +
+        '<button id="complete" class="complete"><div class="list-icon"><i class="bx bx-check"></i></div></button>' + '</div>';
 
         $('.task-container .notcomp').append(taskHTML);
 
         i++;
     }
 
-    // Add event handler to the dynamically created task divs
-    $(".task-container .notcomp").on("click", ".task", function() {
-        $(this).toggleClass("completed");
-    });
-
-    // Add event handler to the dynamically created trash icons
-    $(".task-container .notcomp").on("click", ".fa-trash-alt", function() {
-        var taskDiv = $(this).parent();
-
-        //TODO: add actual delete
-        deleteTask(taskDiv.attr("data-id"));
-        taskDiv.fadeOut(function() {
-            taskDiv.remove();
+    // Left swipe <reference: https://github.com/hosseinnabi-ir/Touch-Swiping-List-Items-using-JavaScript>
+    const items = document.querySelectorAll('.list-item');
+    
+    items.forEach(item => {
+        // Touch start
+        item.addEventListener('touchstart', e => {
+            e.target.dataset.x = Number(e.touches[0].pageX) + Number(e.target.dataset.move) || 0;
+        });
+        // Touch move
+        item.addEventListener('touchmove', e => {
+            let moveX = Number(e.target.dataset.x) - e.touches[0].pageX;
+            // Set up move duration
+            moveX < -130 ? moveX = 95 : null;
+            e.target.dataset.move = moveX;
+            anime({
+                targets: e.target,
+                translateX: -Number(e.target.dataset.move),
+                duration: 300
+            });
+        });
+        // Touch end
+        item.addEventListener('touchend', e => {
+            let elementMove = e.target.dataset.move;
+            if (elementMove > 100)
+                elementMove = 100;
+            
+            else
+                elementMove = 0;
+    
+            items.forEach(item => {
+                let content = item.querySelector('.list-content');
+                if (content === e.target) {
+                    return null;
+                }
+                content.dataset.x = 0;
+                content.dataset.move = 0;
+                anime({
+                    targets: content,
+                    translateX: 0
+                });
+            });
         });
     });
 
-    // Add event handler to the dynamically created check icons
-    $(".task-container .notcomp").on("click", ".fa-check", function() {
+    // Mark task as completed
+    const checkBtns = document.querySelectorAll('.complete');
+    checkBtns.forEach((btn) => {
+        btn.addEventListener("click", markTaskAsCompleted);
+    });
+
+    function markTaskAsCompleted() {
+        console.log("completed");
         var taskDiv = $(this).parent();
         taskDiv.fadeOut(function() {
             $(".comp").append(taskDiv);
@@ -89,10 +130,69 @@ document.addEventListener("DOMContentLoaded", async function(event) {
             taskDiv.find(".fa-trash-alt").remove();
         });
         $(this).remove();
-    });
-    
-});
+    }
 
+    // Ellipse choice list Pop Up
+    const ellipseBtns = document.querySelectorAll('.ellipse');
+    const choicepopUpBtn = document.getElementById("ellipse");
+    const closeChoicePopupBtn = document.getElementById("close-choice-pop-up");
+	const choicePopUp = document.getElementById("choice-pop-up");
+
+    function showChoicePopUp() {
+		choicePopUp.style.display = "flex";
+	}
+
+    function closeChoicePopup() {
+        choicePopUp.style.display = 'none';
+    }
+
+    ellipseBtns.forEach((btn) => {
+        btn.addEventListener("click", showChoicePopUp);
+    });
+    closeChoicePopupBtn.addEventListener("click", closeChoicePopup);
+
+
+    // Invitations Pop Up
+    const inviteBtns = document.querySelectorAll('.invite');
+
+    const popUpBtn = document.getElementById("invite");
+    const closeInvPopupBtn = document.getElementById("close-inv-pop-up");
+	const invPopUp = document.getElementById("inv-pop-up");
+
+	function showInvPopUp() {
+		invPopUp.style.display = "flex";
+	}
+
+    function closeInvPopup() {
+        invPopUp.style.display = 'none';
+    }
+
+	popUpBtn.addEventListener("click", showInvPopUp);
+    inviteBtns.forEach((btn) => {
+        btn.addEventListener("click", showInvPopUp);
+    });
+    closeInvPopupBtn.addEventListener("click", closeInvPopup);
+
+
+    // Delete Button
+    $('.ellipse').on('click', function() {
+        // Show choice list pop up
+        $('#choice-pop-up').addClass('active');
+      
+        // Get the task element
+        var taskElement = $(this).closest('.list-item');
+      
+        // Add click event listener to delete button
+        $('#delete').on('click', function() {
+          // delete from db
+          deleteTask(taskElement.attr("data-id"));
+        
+          // Remove the task element from the DOM
+          taskElement.remove();
+          choicePopUp.style.display = 'none';
+        });
+    });
+});
 
 class Task {
     constructor(id, task_name, description, completed, estimated_time, image_url, invited, category, deleted) {
