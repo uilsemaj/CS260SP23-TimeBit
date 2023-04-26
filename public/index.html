@@ -64,8 +64,16 @@
             <div class="chatbox" id="chatbox">
                 <div class="bubble blue">Hello there! Please tell me about your goals.<br> <br>Try to keep it in a clear sentence with specific target date of less than 2 weeks.<br> <br>For example, a goal could be "Can you help me come up with a plan to prepare for my 5k run in 5 days? I have been running 1k per day but feels like I need to improve my stamina."</div>
             </div>
-            <input type="text" id="userInput" placeholder="Type your message here">
-            <button id="send">Send</button>
+            <div class="assistant-first-inputs">
+                <input type="text" id="userInput" placeholder="Type your message here">
+            
+                <button id="send">Send</button>
+            </div>
+            <div class="assistant-second-inputs">
+                <button id="assistant-accept">Accept</button>
+                <button id="assistant-easier">Easier</button>
+                <button id="assistant-harder">Harder</button>
+            </div>
             <script type="module">
                 import { runFlow } from './js/assistant.js';
 
