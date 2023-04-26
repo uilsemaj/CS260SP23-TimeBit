@@ -119,8 +119,7 @@ function toFirestoreTasks(chatGPTTasks) {
             "task_name" : chatGPTTask["Title"],
             "description" : chatGPTTask["Description"],
             "date": chatGPTTask["DueDate"],
-            "category": chatGPTTask["Category"],
-            "deleted": true,
+            "category": chatGPTTask["Category"]
         });
     }
     chatGPTTasks.forEach(toFirestoreTask);
@@ -224,14 +223,14 @@ function addBubble(text, is_user) {
 
     if (is_user) {
         let userBubble = document.createElement("div");
-        userBubble.innerHTML = text;
+        userBubble.innerHTML = toHTMLmessage(text);
         userBubble.classList.add("bubble", "green");
         chatbox.appendChild(userBubble);
         
     } else {
         let botBubble = document.createElement("div");
 
-        botBubble.innerHTML = text;
+        botBubble.innerHTML = toHTMLmessage(text);
         botBubble.classList.add("bubble", "blue");
         chatbox.appendChild(botBubble);
     }
