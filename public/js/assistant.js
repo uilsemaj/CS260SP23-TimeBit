@@ -33,12 +33,13 @@ document.addEventListener("DOMContentLoaded", async function(event) {
 
     $('#assistant-accept').on('click', function() {
 
-        addBubble("Yep, we'll add them now...", false);
+        addBubble("Yep, we'll add them now", false);
+        addLoadingBubble();
 
         getJSONTasksFromPlan().then( (firestoreTaskObjects) => {
 
             addTasks(firestoreTaskObjects);
-
+            removeLoadingBubble();
             addBubble("Great. They've been added!", false);
     
             $('.assistant-second-inputs').hide();
@@ -128,6 +129,8 @@ function toFirestoreTasks(chatGPTTasks) {
 
 async function obtainPreliminaryPlan(prompt) {
 
+
+
     // User Input
     let userInput;
     if (prompt == null || prompt == "") {
@@ -140,6 +143,7 @@ async function obtainPreliminaryPlan(prompt) {
     }
 
     addBubble(userInput, true);
+    addLoadingBubble();
 
     // Adds user input to running gpt context
     messageHistory.push({role: "user", content: userInput});
@@ -162,6 +166,7 @@ async function obtainPreliminaryPlan(prompt) {
             // Adds assistant repsonse to running gpt context
             messageHistory.push({role: "assistant", content: botResponse});
 
+            removeLoadingBubble();
             addBubble(botResponse, false);
 
             console.log("Got plan, awaiting user input");
@@ -235,4 +240,27 @@ function addBubble(text, is_user) {
         chatbox.appendChild(botBubble);
     }
     chatbox.scrollTop = chatbox.scrollHeight;
+}
+
+function addLoadingBubble() {
+    let chatbox = document.getElementById("chatbox");
+
+    let wrapper = document.createElement("div");
+    wrapper.setAttribute("style", "width: 100%; display: inline-block;");
+    wrapper.classList.add("bubble-wrapper");
+
+    let bubble = document.createElement("div");
+    bubble.classList.add("bubble");
+    bubble.setAttribute("style", "width: 30px; padding-left: 30px; background-color: lightblue;");
+
+    let dots = document.createElement("div");
+    dots.classList.add("dot-flashing");
+
+    bubble.appendChild(dots);
+    wrapper.appendChild(bubble);
+    chatbox.appendChild(wrapper);
+}
+
+function removeLoadingBubble() {
+    document.querySelectorAll('.bubble-wrapper').forEach(e => e.remove());
 }
