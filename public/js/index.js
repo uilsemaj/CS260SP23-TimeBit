@@ -46,7 +46,6 @@ document.addEventListener("DOMContentLoaded", async function(event) {
         '<div class="list-content"><div class="profile">' + '<img src="' + imageUrl + '"></div>' + 
         '<button id="ellipse" class="ellipse"><div class="list-icon"><i class="bx bx-dots-horizontal-rounded"></i></div></button><div class="caption">' +
         '<h3>' + taskName + ' - ' + estimatedTime +  ' min</h3><p>' + description + '</p></div></div>' +
-        '<button id="delete" class="delete"><div class="list-icon"><i class="bx bx-trash"></i></div></button>' +
         '<button id="complete" class="complete"><div class="list-icon"><i class="bx bx-check"></i></div></button>' + '</div>';
 
         $('#task-container').append(taskHTML);
@@ -115,19 +114,6 @@ document.addEventListener("DOMContentLoaded", async function(event) {
         $(this).remove();
     }
 
-    $("#task-container.notcomp").on("click", ".delete", function() {
-        var taskDiv = $(this).parent();
-        deleteTask(taskDiv);
-    });
-    
-    function deleteTask(taskDiv) {
-        //console.log("deleted");
-        taskDiv.fadeOut(function() {
-            taskDiv.remove();
-        });
-    }
-
-
     // Ellipse choice list Pop Up
     const ellipseBtns = document.querySelectorAll('.ellipse');
     const choicepopUpBtn = document.getElementById("ellipse");
@@ -168,6 +154,24 @@ document.addEventListener("DOMContentLoaded", async function(event) {
         btn.addEventListener("click", showInvPopUp);
     });
     closeInvPopupBtn.addEventListener("click", closeInvPopup);
+
+    // Delete task
+    // const deleteBtns = document.querySelectorAll('.delete');
+    // deleteBtns.forEach((btn) => {
+    //     var taskDiv = $(this).parent();
+    //     btn.addEventListener("click", deleteTask(taskDiv));
+    // });
+    // $("#task-container.notcomp").on("click", ".delete", function() {
+    //     var taskDiv = $(this).parent();
+    //     deleteTask(taskDiv);
+    // });
+    
+    function deleteTask(taskDiv) {
+        //console.log("deleted");
+        taskDiv.fadeOut(function() {
+            taskDiv.remove();
+        });
+    }
     
 });
 
