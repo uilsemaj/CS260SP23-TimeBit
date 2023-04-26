@@ -155,24 +155,22 @@ document.addEventListener("DOMContentLoaded", async function(event) {
     });
     closeInvPopupBtn.addEventListener("click", closeInvPopup);
 
-    // Delete task
-    // const deleteBtns = document.querySelectorAll('.delete');
-    // deleteBtns.forEach((btn) => {
-    //     var taskDiv = $(this).parent();
-    //     btn.addEventListener("click", deleteTask(taskDiv));
-    // });
-    // $("#task-container.notcomp").on("click", ".delete", function() {
-    //     var taskDiv = $(this).parent();
-    //     deleteTask(taskDiv);
-    // });
-    
-    function deleteTask(taskDiv) {
-        //console.log("deleted");
-        taskDiv.fadeOut(function() {
-            taskDiv.remove();
+
+    // Delete Button
+    $('.ellipse').on('click', function() {
+        // Show choice list pop up
+        $('#choice-pop-up').addClass('active');
+      
+        // Get the task element
+        var taskElement = $(this).closest('.list-item');
+      
+        // Add click event listener to delete button
+        $('#delete').on('click', function() {
+          // Remove the task element from the DOM
+          taskElement.remove();
+          choicePopUp.style.display = 'none';
         });
-    }
-    
+    });
 });
 
 
