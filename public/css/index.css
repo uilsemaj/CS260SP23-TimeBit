@@ -261,6 +261,69 @@ html {
 
 /* Assistant Styles */
 
+#Tab1 {
+    overflow: hidden;
+}
+
+.chatbox {
+    /* border: 1px solid ; */
+    overflow-y: scroll;
+    width: 100%;
+    height: 80%;
+    margin-top: 5px;
+}
+.bubble {
+    display: inline-block;
+    max-width: 75%;
+    margin: 5px;
+    padding: 10px;
+    border-radius: 10px;
+    font-size: 18px;
+    font-family: Arial, sans-serif;
+}
+.blue {
+    background-color: #2f80ed;
+    color: white;
+    float: left;
+    box-shadow: -3px 3px 5px rgba(0, 0, 0, 0.2);
+}
+.green {
+    background-color: #27ae60;
+    color: white;
+    float: right;
+    box-shadow: 3px -3px 5px rgba(0, 0, 0, 0.2)
+}
+
+.btn {
+    box-sizing: border-box;
+    font-family: inherit;
+    padding: 0.8rem 1rem;
+    border-radius: 1rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    border: 1px solid var(--button-color);
+    background-color: var(--button-color);
+    color: var(--button-text-color);
+    font-size: 1rem;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.btn-accept {
+    --button-color: #00FF7F;
+    --button-text-color: #fafbfc;
+}
+
+.btn-easier {
+    --button-color: #88d2fc;
+    --button-text-color: #fafbfc;
+}
+
+.btn-harder {
+    --button-color: #0f75ae;
+    --button-text-color:#fafbfc;  
+}
+
 .dot-flashing {
     position: relative;
     width: 10px;
@@ -305,4 +368,52 @@ html {
     50%, 100% {
       background-color: rgba(152, 128, 255, 0.2);
     }
+}
+
+.material-icons {
+    vertical-align: middle;
+}
+
+.assistant-first-inputs {
+    display: block;
+    width: 300px;
+    height: 35px;
+    position: relative;
+    box-shadow: inset 0px 4px 20px 4px rgba(0, 0, 0, 0.09);
+    border-radius: 35px;
+    overflow: hidden;
+    margin-top: 5px;
+}
+
+
+.assistant-second-inputs {
+    margin-top: 5px;
+}
+
+
+#userInput {
+    width: 200px;
+    background: none;
+    border: none;
+    padding: 12px 20px;
+    color: #6A7C92;
+}
+
+#userInput:focus {
+    outline: none;
+}
+
+#send {
+    font-size: 12px;
+    color: #6A7C92;
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 70px;
+    height: 35px;
+    border-radius: 17px;
+    border: none;
+    background: none;
+    box-shadow: 5px -2px 81px 1px rgba(0, 0, 0, 0.09);
+    cursor: pointer;
   }

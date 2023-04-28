@@ -20,39 +20,18 @@
 
 <!-- Open Sans Font -->
 <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
 <!-- BoxIcons v2.1.2 -->
 <link href="https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css" rel="stylesheet">
 <style>
-    .chatbox {
-        border: 1px solid black;
-        overflow-y: scroll;
-    }
-    .bubble {
-        display: inline-block;
-        max-width: 75%;
-        margin: 5px;
-        padding: 10px;
-        border-radius: 10px;
-        font-size: 18px;
-        font-family: Arial, sans-serif;
-    }
-    .blue {
-        background-color: #2f80ed;
-        color: white;
-        float: left;
-    }
-    .green {
-        background-color: #27ae60;
-        color: white;
-        float: right;
-    }
+
 </style>
 <script>
     // sets height to adjust with the grid
     $(window).resize(function() {
-        $('.chatbox').height($(window).height() * 0.9);
-        $('.chatbox').width($(window).width() * 0.6);
+        // $('.chatbox').height($(window).height() * 0.9);
+        // $('.chatbox').width($(window).width() * 0.6);
     }).resize();
 </script>
 </head>
@@ -63,24 +42,25 @@
     <div class="container">
         <h1>TimeBits</h1>
         <div class="tab">
-            <button data-tab="Tab1" class="tablinks">Voice</button>
-            <button id="home-tab-button" data-tab="Tab2" class="tablinks">Home</button>
-            <button data-tab="Tab3" class="tablinks">Profile</button>
+            <button data-tab="Tab1" class="tablinks"><i class="material-icons" style="font-size:24px">smart_toy</i></button>
+            <button id="home-tab-button" data-tab="Tab2" class="tablinks"><i class="material-icons" style="font-size:24px">home</i></button>
+            <button data-tab="Tab3" class="tablinks"><i class="material-icons" style="font-size:24px">account_circle</i></button>
         </div>
         <div id="Tab1" class="tabcontent">
-            <h3>Goal Planning Assistant</h3>
+            <span style="padding: 5px;">Goal Planning Assistant</span>
             <div class="chatbox" id="chatbox">
                 <div class="bubble blue">Hello there! Please tell me about your goals.<br> <br>Try to keep it in a clear sentence with specific target date of less than 2 weeks.<br> <br>For example, a goal could be "Can you help me come up with a plan to prepare for my 5k run in 5 days? I have been running 1k per day but feels like I need to improve my stamina."</div>
             </div>
             <div class="assistant-first-inputs">
                 <input type="text" id="userInput" placeholder="Type your message here">
             
-                <button id="send">Send</button>
+                <button id="send"><i class="material-icons" style="font-size:24px">send</i>
+                </button>
             </div>
             <div class="assistant-second-inputs">
-                <button id="assistant-accept">Accept</button>
-                <button id="assistant-easier">Easier</button>
-                <button id="assistant-harder">Harder</button>
+                <button class="btn btn-accept" id="assistant-accept">Accept</button>
+                <button class="btn btn-easier" id="assistant-easier">Easier</button>
+                <button class="btn btn-harder" id="assistant-harder">Harder</button>
             </div>
             <script type="module">
                 import { runFlow } from './js/assistant.js';
