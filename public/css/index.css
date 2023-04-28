@@ -244,6 +244,29 @@ html {
     margin-bottom: 8%;
 }
 
+/* For fold completed tasks button */
+.collapsible {
+    background-color: #eee;
+    color: #444;
+    cursor: pointer;
+    padding: 18px;
+    border-radius: 25px;
+    width: 100%;
+    border: none;
+    text-align: left;
+    outline: none;
+    font-size: 15px;
+}
+
+.active, .collapsible:hover {
+    background-color: #ccc;
+}
+
+#comp {
+    display: none;
+}
+
+
 /* Style the tab content for mobile devices */
 @media screen and (max-width: 600px) {
 	.tab button {
@@ -257,7 +280,6 @@ html {
         font-size: 28px;
     }
 }
-
 
 /* Assistant Styles */
 
