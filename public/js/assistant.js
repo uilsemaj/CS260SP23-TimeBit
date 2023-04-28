@@ -259,6 +259,8 @@ function addLoadingBubble() {
     bubble.appendChild(dots);
     wrapper.appendChild(bubble);
     chatbox.appendChild(wrapper);
+
+    chatbox.scrollTop = chatbox.scrollHeight;
 }
 
 function removeLoadingBubble() {
