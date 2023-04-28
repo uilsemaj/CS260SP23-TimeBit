@@ -1,4 +1,4 @@
-import {db, deleteTask, POWER_USER_ID} from "./firestore.js";
+import {db, deleteTask, markCompleted, POWER_USER_ID} from "./firestore.js";
 import { getFirestore, collection, getDocs, doc, getDoc } from "https://www.gstatic.com/firebasejs/9.1.1/firebase-firestore.js"
 
 const categoryToImage = {
@@ -120,6 +120,8 @@ document.addEventListener("DOMContentLoaded", async function(event) {
     function markTaskAsCompleted() {
         console.log("completed");
         var taskDiv = $(this).parent();
+        
+        markCompleted(taskDiv.attr("data-id")); // mark as completed in firestore
         taskDiv.fadeOut(function() {
             $(".comp").append(taskDiv);
             $('.list-item').css({

@@ -29,5 +29,17 @@ async function deleteTask(taskId) {
 
 }
 
+async function markCompleted(taskId) {
 
-export {db, deleteTask, POWER_USER_ID};
+    const taskRef = doc(db, "tasks", POWER_USER_ID, "tasks", taskId);
+
+    await updateDoc(taskRef, {
+        complete: true
+    });
+
+    console.log(`completed 1 record with id ${taskId}`);
+
+}
+
+
+export {db, deleteTask, markCompleted, POWER_USER_ID};
