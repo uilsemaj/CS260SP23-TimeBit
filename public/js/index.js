@@ -67,6 +67,22 @@ document.addEventListener("DOMContentLoaded", async function(event) {
 
         i++;
     }
+    // Get the popup and overlay elements
+    var popup = document.querySelector('.popup');
+    var overlay = document.querySelector('.overlay');
+
+    // Show the popup and overlay
+    popup.style.display = 'block';
+    overlay.style.display = 'block';
+
+    // Get the close button
+    var closeBtn = document.querySelector('#close-btn');
+
+    // Add event listener to close button
+    closeBtn.addEventListener('click', function() {
+        popup.style.display = 'none';
+        overlay.style.display = 'none';
+    });
 
     // Left swipe <reference: https://github.com/hosseinnabi-ir/Touch-Swiping-List-Items-using-JavaScript>
     const items = document.querySelectorAll('.list-item');
