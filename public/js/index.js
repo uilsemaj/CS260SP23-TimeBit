@@ -80,7 +80,7 @@ document.addEventListener("DOMContentLoaded", async function(event) {
         item.addEventListener('touchmove', e => {
             let moveX = Number(e.target.dataset.x) - e.touches[0].pageX;
             // Set up move duration
-            moveX < -130 ? moveX = 95 : null;
+            moveX < 130 ? moveX = 95 : null;
             e.target.dataset.move = moveX;
             anime({
                 targets: e.target,
