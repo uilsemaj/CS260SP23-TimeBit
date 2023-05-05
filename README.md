@@ -20,7 +20,7 @@ User can invite friends to join them on completing tasks.
 User can interact with an AI personal coach to plan detailed tasks to prepare for their goals.
 
 ## Run our app on you phone!
-Run command line "node App.js" can enter "your wifi ip address:8000" (eg. 10.142.212.234:8000) to your browser and access our app.
+Run command line "node App.js" on your computer, then enter "your wifi ip address:8000" (eg. 10.142.212.234:8000) to your browser and access our app.
 
 **Enjoy it and hope you have fun!**
 
