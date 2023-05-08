@@ -1,4 +1,4 @@
-# CS260SP23-TimeBit
+# CS260SP23-TimeBits
 ## Achieve your goal with dedicated personal coach
 
 ## The Problem
