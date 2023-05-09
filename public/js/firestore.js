@@ -1,13 +1,13 @@
-var POWER_USER_ID = "e06Xrxa3lzNT8AA0nFvb";
+var POWER_USER_ID = "<TO BE FILLED>"; //TODO: ID to be filled
 
 const firebaseConfig = {
-    apiKey: "AIzaSyCwAjDaM8KbvpsBV1j_Rj5pDr4XcXun-mU",
+    apiKey: "<TO BE FILLED>", //TODO: Value to be filled
     authDomain: "timebits-cbd2c.firebaseapp.com",
     projectId: "timebits-cbd2c",
     storageBucket: "timebits-cbd2c.appspot.com",
-    messagingSenderId: "229456209691",
-    appId: "1:229456209691:web:d8e9eb6a121569be4f55be",
-    measurementId: "G-BS2BH93LK6"
+    messagingSenderId: "<TO BE FILLED>", //TODO: Value to be filled
+    appId: "<TO BE FILLED>", //TODO: Value to be filled
+    "<TO BE FILLED>", //TODO: Value to be filled
   };
 
 

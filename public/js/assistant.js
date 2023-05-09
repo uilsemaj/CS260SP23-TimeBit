@@ -2,7 +2,7 @@ import {db, POWER_USER_ID} from "./firestore.js";
 import {getFirestore, collection, doc, setDoc} from "https://www.gstatic.com/firebasejs/9.1.1/firebase-firestore.js"
 
 //HARD-CODED API key for now.
-const OPENAI_API_KEY = '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';
+const OPENAI_API_KEY = "<TO BE FILLED>", //TODO: Value to be filled
 // prepare chatGPT for some context
 const date = new Date();
 
